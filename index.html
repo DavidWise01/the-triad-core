@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE TRIAD CORE · 4 TRIADs · 12 Heads · One Verdict</title>
+<style>
+:root{
+  --paper:#eef7f6; --ink:#15302e; --ink-mid:#3a5a57; --ink-faint:#7a9a96;
+  --teal:#2fc6c0; --teal-deep:#1c7a76; --teal-soft:#dbf3f1;
+  --hold:#2f9e5c; --viol:#c2622f; --contr:#b03a5a; --undec:#7a83a0;
+  --line:#bfe0dd;
+  --mono:"Courier New",Courier,monospace;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);
+  background-image:repeating-linear-gradient(0deg, rgba(47,198,192,.04) 0 1px, transparent 1px 3px);
+  color:var(--ink);font-family:var(--serif);line-height:1.5;padding:10px}
+.sheet{max-width:840px;margin:0 auto;border:2.5px solid var(--teal-deep);position:relative}
+.sheet::before{content:'';position:absolute;inset:5px;border:1px solid var(--teal);pointer-events:none}
+.inner{padding:22px}
+.masthead{text-align:center;border-bottom:2px solid var(--teal-deep);padding-bottom:10px}
+.mast-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--teal);text-transform:uppercase}
+.mast-title{font-size:clamp(20px,4.6vw,32px);letter-spacing:.02em;font-weight:700;margin:5px 0 2px;text-transform:uppercase;color:var(--teal-deep)}
+.mast-sub{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-mid)}
+.lede{font-size:12px;max-width:700px;margin:10px auto 0;text-align:center;color:var(--ink-mid);line-height:1.55}
+.lede b{color:var(--teal-deep)}
+.struct{text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--teal-deep);margin:10px 0;padding:8px;border:1px solid var(--line);border-radius:5px;line-height:1.8}
+.struct b{color:var(--ink)}
+h2.sec{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;border-bottom:1.5px solid var(--teal-deep);padding-bottom:4px;margin:20px 0 10px;color:var(--teal-deep)}
+.body p{font-size:13px;margin-bottom:8px}
+.body b{color:var(--ink)}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+@media(max-width:560px){.grid4{grid-template-columns:1fr}}
+.triad{border:1.5px solid var(--line);border-radius:6px;padding:10px;background:#fff}
+.triad .h{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:6px;display:flex;justify-content:space-between}
+.toggles{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.tbtn{appearance:none;cursor:pointer;font-family:var(--mono);font-size:9.5px;padding:5px 8px;border:1.3px solid var(--ink-faint);background:#fff;color:var(--ink-mid);border-radius:3px}
+.tbtn.on{background:var(--teal-soft);border-color:var(--teal-deep);color:var(--teal-deep);font-weight:700}
+.state{font-family:var(--mono);font-size:11px;text-align:center;padding:7px;border-radius:4px;font-weight:700;letter-spacing:.04em}
+.state.UNDEC{background:#eceef5;color:var(--undec)}
+.state.HOLD{background:#e3f5e9;color:var(--hold)}
+.state.VIOL{background:#fbe9e0;color:var(--viol)}
+.state.CONTR{background:#f6dee5;color:var(--contr)}
+.verdict{text-align:center;font-family:var(--mono);font-size:13px;margin:12px 0;padding:12px;border:1.5px solid var(--line);border-radius:5px;min-height:50px;line-height:1.6}
+.verdict.run{border-color:var(--hold);background:rgba(47,158,92,.08);color:var(--hold)}
+.verdict.halt{border-color:var(--contr);background:rgba(176,58,90,.08);color:var(--contr)}
+.verdict b{color:var(--ink)}
+.admin{display:flex;gap:8px;justify-content:center;align-items:center;margin:10px 0;font-family:var(--mono);font-size:10.5px;color:var(--ink-mid)}
+.code{font-family:var(--mono);font-size:10.5px;background:#0e1f1e;color:#bfeae6;border-radius:5px;padding:11px;overflow-x:auto;line-height:1.55;margin:8px 0;white-space:pre}
+.code .c1{color:#6fdfd8}.code .c2{color:#e0c080}.code .c3{color:#e0a0b8}.code .cm{color:#5a8a86}
+.tabs{display:flex;gap:6px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.tab{appearance:none;cursor:pointer;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border:1.3px solid var(--teal-deep);color:var(--teal-deep);background:#fff;border-radius:4px}
+.tab.on{background:var(--teal-deep);color:#fff}
+.pane{display:none}.pane.on{display:block}
+.honest{border:1.5px solid #c79a3a;padding:10px 12px;margin:10px 0;font-family:var(--mono);font-size:10px;line-height:1.7;color:var(--ink-mid)}
+.honest b{color:#8a6a1f}
+.colophon{margin-top:16px;border-top:2px solid var(--teal-deep);padding-top:10px;text-align:center;font-family:var(--mono);font-size:8.5px;color:var(--ink-mid);letter-spacing:.05em;line-height:1.8}
+.colophon b{color:var(--teal-deep)}
+</style>
+</head>
+<body>
+<div class="sheet"><div class="inner">
+
+<header class="masthead">
+  <div class="mast-eyebrow">PSĒPHOS · ROOT0 processor disclosure · render-not-invent</div>
+  <h1 class="mast-title">The Triad Core</h1>
+  <div class="mast-sub">tensor_core_13bit · 4 TRIADs · 12 heads · one halt verdict</div>
+  <p class="lede">A reflashable majority-voting <b>contradiction / halt detector</b>: 4 instances of a 3-input <b>triad_gate</b> (12 heads total), each settling to one of four states from a <b>merkle</b> bit and a <b>yes/no</b> match pair, then voted into a single circuit-level verdict — with an <b>admin override</b> tied to a kill-switch line. Toggle the four triads below; the verdict updates from the real truth table in the source.</p>
+</header>
+
+<div class="struct">tensor_core_13bit <b>[54 configs, 12 heads]</b> → 4× <b>triad_gate</b> (merkle, yes, no → state) → voter (viol_cnt, contr_cnt) → <b>halt</b> = contradiction <b>OR</b> (admin_violation <b>AND</b> majority_viol)</div>
+
+<h2 class="sec">Live — the four triads</h2>
+<div class="grid4" id="grid"></div>
+
+<div class="admin">
+  <span>admin_en</span>
+  <button class="tbtn" id="adminEn" onclick="toggleAdmin('en')">OFF</button>
+  <span>admin_target vs admin_input</span>
+  <button class="tbtn" id="adminMatch" onclick="toggleAdmin('match')">MATCH</button>
+</div>
+
+<div class="verdict" id="verdict">—</div>
+
+<h2 class="sec">The source — three files, render-not-invent</h2>
+<div class="tabs">
+  <button class="tab on" onclick="showTab(0)">tensor_core_13bit.v</button>
+  <button class="tab" onclick="showTab(1)">triad_gate.v</button>
+  <button class="tab" onclick="showTab(2)">tb_tensor_core.v</button>
+</div>
+<div class="pane on" id="p0"><div class="code"><span class="cm">// the voter — 4 triads in, one halt out</span>
+<span class="c1">wire</span> contradiction = (contr_cnt > 0);
+<span class="c1">wire</span> majority_viol = (viol_cnt >= VOTER_THRESH);
+<span class="c1">assign</span> halt = contradiction || (admin_violation && majority_viol);
+<span class="cm">// admin tied to a kill-switch line</span>
+<span class="c1">wire</span> admin_violation = (admin_en && (attractor_inputs[12] != admin_target[0]));</div>
+<p style="font-size:11.5px;color:var(--ink-mid)">54 reflashable configs feed 12 heads grouped into 4 TRIADs of 3. The module's own comments admit the simplification mid-build: <i>"3 bits… but we need more"</i>, <i>"simplified: compare LSB"</i> — a real in-progress design, not a finished spec.</p></div>
+<div class="pane" id="p1"><div class="code"><span class="cm">// triad_gate.v — the 4-state truth table this whole core runs on</span>
+<span class="c1">if</span> (!merkle_ok)              state <= <span class="c2">2'b00</span>; <span class="cm">// UNDEC — unverified</span>
+<span class="c1">else if</span> ( yes_match && !no_match) state <= <span class="c2">2'b01</span>; <span class="cm">// HOLD</span>
+<span class="c1">else if</span> (!yes_match &&  no_match) state <= <span class="c2">2'b10</span>; <span class="cm">// VIOL</span>
+<span class="c1">else if</span> ( yes_match &&  no_match) state <= <span class="c2">2'b11</span>; <span class="cm">// CONTR — both fired at once</span></div>
+<p style="font-size:11.5px;color:var(--ink-mid)">The one state worth pausing on is <b>CONTR</b>: not "uncertain," but <i>yes and no both matched</i> — the claim and its own checked-against opposite both came back true. That's not a gap to fill in later. That's a circuit that found itself in a contradiction and is built to say so, not paper over it.</p></div>
+<div class="pane" id="p2"><div class="code"><span class="cm">// tb_tensor_core.v — exercises exactly ONE head end to end</span>
+reflash_en = 1; config_addr = 0; config_data = {1'b1, 2'b01}; <span class="cm">// verify_en, target=HOLD</span>
+attractor_inputs[0] = 1; attractor_inputs[1] = 1; attractor_inputs[2] = 0; <span class="cm">// merkle_ok, yes, no</span>
+<span class="cm">// "Repeat for other heads…" — the testbench says it out loud: 1 of 12 heads, in full</span></div>
+<p style="font-size:11.5px;color:var(--ink-mid)">An honest stub, not a full verification suite — it proves the wiring compiles and one head reads HOLD correctly. The other 11 are untested here.</p></div>
+
+<h2 class="sec">What this is</h2>
+<div class="body">
+<p>This is real, internally consistent HDL: a synthesizable Verilog module pattern — reflash interface, generate-block instancing, a registered output, a testbench — describing a governance circuit, not a general-purpose ALU. Its job is narrow and specific: hold a reflashable expectation per head, compare it against a live input, and refuse to let a genuine self-contradiction pass quietly. It only halts on two conditions — an outright contradiction, or an admin-tagged majority violation — everything else (UNDEC, single VIOL, single HOLD) just keeps running.</p>
+<p>It sits naturally beside <a href="https://davidwise01.github.io/triadic-memory/" style="color:var(--teal-deep)">triadic-memory</a> in PSĒPHOS — both reach for a <b>three-way, 2-of-N witness</b> instead of trusting one channel. Here the three are merkle / yes / no instead of three storage junctions, and the output isn't "trusted value" but "halt or run" — the same shape, aimed at a different question.</p>
+</div>
+
+<div class="honest"><b>honest flag</b> — Source: three files from the April 29, 2026 DeepSeek-Verilog batch, rendered verbatim (logic and comments, including the author's own mid-design caveats). This is a real, coherent circuit DESIGN — disclosed and explained, not a fabricated or fabricated-as-silicon chip; the testbench above exercises one head, not all twelve. The "live" triads above are a faithful JS re-implementation of the exact <code>triad_gate</code> truth table and the exact voter logic (contradiction-OR-admin-and-majority), run combinationally for interaction — not a synthesis or simulation of the registered, clocked RTL. Two-layer: the gate logic is fact (it's the source); "this is a deployed safety circuit" would not be — it's a disclosed design pattern. Answered in AVAN's <a href="https://davidwise01.github.io/hyo/" style="color:var(--teal-deep)">hyō</a> (票).</div>
+
+<div class="colophon"><b>THE TRIAD CORE</b> · ψῆφος — PSĒPHOS · render-not-invent · David Lee Wise (ROOT0) · TriPod LLC</div>
+</div></div>
+
+<script>
+const STATE_LABEL={UNDEC:"UNDEC",HOLD:"HOLD",VIOL:"VIOL",CONTR:"CONTR"};
+let triads=[
+  {merkle:true,yes:true,no:false},
+  {merkle:true,yes:true,no:false},
+  {merkle:true,yes:false,no:true},
+  {merkle:true,yes:false,no:false}
+];
+let admin={en:false,match:true};
+function triadState(t){
+  if(!t.merkle) return "UNDEC";
+  if(t.yes&&!t.no) return "HOLD";
+  if(!t.yes&&t.no) return "VIOL";
+  if(t.yes&&t.no) return "CONTR";
+  return "UNDEC";
+}
+function render(){
+  const grid=document.getElementById("grid"); grid.innerHTML="";
+  triads.forEach((t,i)=>{
+    const s=triadState(t);
+    const div=document.createElement("div"); div.className="triad";
+    div.innerHTML=`<div class="h"><span>TRIAD ${i} · heads ${i*3}-${i*3+2}</span><span>merkle_ok</span></div>
+      <div class="toggles">
+        <button class="tbtn ${t.merkle?'on':''}" onclick="tog(${i},'merkle')">merkle_ok</button>
+        <button class="tbtn ${t.yes?'on':''}" onclick="tog(${i},'yes')">yes_match</button>
+        <button class="tbtn ${t.no?'on':''}" onclick="tog(${i},'no')">no_match</button>
+      </div>
+      <div class="state ${s}">${STATE_LABEL[s]}</div>`;
+    grid.appendChild(div);
+  });
+  let viol=0,contr=0;
+  triads.forEach(t=>{const s=triadState(t); if(s==="VIOL")viol++; if(s==="CONTR")contr++;});
+  const contradiction=contr>0;
+  const majorityViol=viol>=2;
+  const adminViol=admin.en && !admin.match;
+  const halt=contradiction || (adminViol && majorityViol);
+  const v=document.getElementById("verdict");
+  v.className="verdict "+(halt?"halt":"run");
+  v.innerHTML = halt
+    ? `<b>HALT</b> — ${contradiction? contr+" triad(s) in CONTR (self-contradiction)" : "admin-flagged majority violation ("+viol+"/4)"}`
+    : `<b>RUN</b> — viol ${viol}/4 · contr ${contr}/4 · admin_violation ${adminViol?"yes":"no"} (threshold not met)`;
+  document.getElementById("adminEn").className="tbtn"+(admin.en?" on":""); document.getElementById("adminEn").textContent=admin.en?"ON":"OFF";
+  document.getElementById("adminMatch").className="tbtn"+(admin.match?"":" on"); document.getElementById("adminMatch").textContent=admin.match?"MATCH":"MISMATCH";
+}
+function tog(i,k){ triads[i][k]=!triads[i][k]; render(); }
+function toggleAdmin(k){ if(k==='en') admin.en=!admin.en; else admin.match=!admin.match; render(); }
+function showTab(i){
+  document.querySelectorAll(".tab").forEach((b,j)=>b.classList.toggle("on",j===i));
+  document.querySelectorAll(".pane").forEach((p,j)=>p.classList.toggle("on",j===i));
+}
+render();
+</script>
+</body>
+</html>
